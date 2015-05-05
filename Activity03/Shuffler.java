@@ -14,13 +14,14 @@ public class Shuffler {
 	/**
 	 * The number of values to shuffle.
 	 */
-	private static final int VALUE_COUNT = 4;
+	private static final int VALUE_COUNT = 52;
 
 	/**
 	 * Tests shuffling methods.
 	 * @param args is not used.
 	 */
 	public static void main(String[] args) {
+	    
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive perfect shuffles:");
 		int[] values1 = new int[VALUE_COUNT];
@@ -36,10 +37,11 @@ public class Shuffler {
 			System.out.println();
 		}
 		System.out.println();
-
+       
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive efficient selection shuffles:");
-		int[] values2 = new int[VALUE_COUNT];
+		
+	    int[] values2 = new int[VALUE_COUNT];
 		for (int i = 0; i < values2.length; i++) {
 			values2[i] = i;
 			}
@@ -62,7 +64,24 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void perfectShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		 int upTo = (values.length+1)/2;
+		 int[] values1=new int[values.length];
+		 int p=0;
+		 for (int e:values){
+		    values1[p]=e;
+		    p++;   
+		  }   
+		 int k=0;
+		 for (int j=0;j<upTo;j++) {
+		      values[k]= values1[j];
+		      k+=2;
+		 } 
+		 k=1;
+		 for (int j=upTo+1;j<values.length;j++) {
+		      values[k]= values1[j];
+		      k+=2;
+		 } 
+		  
 	}
 
 	/**
@@ -77,6 +96,18 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void selectionShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+	    int empty = -1;
+		int[] shuffled = new int[52];
+		for (int i=0; i<52; i++){
+		    shuffled[i]=values[i];
+		    values[i]=-1;    
+		  }    
+		for (int k=0;k<52;k++) {
+		   int j = (int)(52*Math.random());
+		   while (values[j]!=empty)
+		       j = (int)(52*Math.random());
+		   values[j]=shuffled[k];    
+		} 
+		
 	}
 }
